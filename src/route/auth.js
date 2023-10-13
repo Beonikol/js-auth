@@ -75,7 +75,7 @@ router.post('/signup', function (req, res) {
 
   if (!email || !password || !role) {
     return res.status(400).json({
-      message: "Помилка. Обо'язкові поля відсутні",
+      message: "Помилка. Обов'язкові поля відсутні",
     })
   }
 
@@ -87,6 +87,7 @@ router.post('/signup', function (req, res) {
         message: 'Помилка. Такий користувач вже існує',
       })
     }
+
     const newUser = User.create({ email, password, role })
 
     const session = Session.create(newUser)
@@ -94,7 +95,7 @@ router.post('/signup', function (req, res) {
     Confirm.create(newUser.email)
 
     return res.status(200).json({
-      message: 'Користувач успішно зареєстрований',
+      message: 'Користувач успішно зареєстрованний',
       session,
     })
   } catch (err) {
@@ -104,7 +105,7 @@ router.post('/signup', function (req, res) {
   }
 })
 
-// ================================================
+// ================================================================
 
 // router.get Створює нам один ентпоїнт
 
@@ -161,7 +162,9 @@ router.post('/recovery', function (req, res) {
   }
 })
 
-// =========================================================
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/recovery-confirm', function (req, res) {
@@ -229,8 +232,6 @@ router.post('/recovery-confirm', function (req, res) {
   }
 })
 
-// ===========================================
-
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/signup-confirm', function (req, res) {
   const { renew, email } = req.query
@@ -238,6 +239,7 @@ router.get('/signup-confirm', function (req, res) {
   if (renew) {
     Confirm.create(email)
   }
+
   // res.render генерує нам HTML сторінку
 
   // ↙️ cюди вводимо назву файлу з сontainer
@@ -259,6 +261,7 @@ router.get('/signup-confirm', function (req, res) {
 
 router.post('/signup-confirm', function (req, res) {
   const { code, token } = req.body
+
   if (!code || !token) {
     return res.status(400).json({
       message: "Помилка. Обов'язкові поля відсутні",
@@ -284,16 +287,16 @@ router.post('/signup-confirm', function (req, res) {
 
     if (email !== session.user.email) {
       return res.status(400).json({
-        message: 'Код не дісний',
+        message: 'Код не дійсний',
       })
     }
 
-    // const user = User.getByEmail(session.user.email)
-    // user.isConfirm = true
+    const user = User.getByEmail(session.user.email)
+    user.isConfirm = true
     session.user.isConfirm = true
 
     return res.status(200).json({
-      message: 'Випідтвердили свою пошту',
+      message: 'Ви підтвердили свою пошту',
       session,
     })
   } catch (err) {
@@ -303,7 +306,9 @@ router.post('/signup-confirm', function (req, res) {
   }
 })
 
-// ===============================================
+// ================================================================
+
+// router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/login', function (req, res) {
@@ -340,13 +345,14 @@ router.post('/login', function (req, res) {
 
     if (!user) {
       return res.status(400).json({
-        message: 'Користувач з таким email не існує',
+        message:
+          'Помилка. Користувач з таким email не існує',
       })
     }
 
     if (user.password !== password) {
       return res.status(400).json({
-        message: 'Помилка. пароль не підходить',
+        message: 'Помилка. Пароль не підходить',
       })
     }
 

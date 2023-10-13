@@ -37,7 +37,7 @@ router.get('/user-list-data', function (req, res) {
 
   if (list.length === 0) {
     return res.status(400).json({
-      message: 'Список користувачыв порожный',
+      message: 'Список користувачів порожній',
     })
   }
 
@@ -49,12 +49,6 @@ router.get('/user-list-data', function (req, res) {
     })),
   })
 })
-
-// ================================================
-
-// ================================================================
-
-// router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/user-item', function (req, res) {
@@ -80,8 +74,6 @@ router.get('/user-item', function (req, res) {
 router.get('/user-item-data', function (req, res) {
   const { id } = req.query
 
-  console.log(list)
-
   if (!id) {
     return res.status(400).json({
       message: 'Потрібно передати ID користувача',
@@ -92,7 +84,7 @@ router.get('/user-item-data', function (req, res) {
 
   if (!user) {
     return res.status(400).json({
-      message: 'Користувача з таким ID не існує',
+      message: 'Користувач з таким ID не існує',
     })
   }
 
@@ -105,8 +97,6 @@ router.get('/user-item-data', function (req, res) {
     },
   })
 })
-
-// ================================================
 
 // Підключаємо роутер до бек-енду
 module.exports = router

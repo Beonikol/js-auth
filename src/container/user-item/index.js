@@ -92,15 +92,15 @@ class UserItem extends List {
               <span class="data__value">${id}</span>
           </div>
           <div class="data">
-              <span class="data__title">ID</span>
+              <span class="data__title">E-mail</span>
               <span class="data__value">${email}</span>
           </div>
           <div class="data">
-              <span class="data__title">ID</span>
+              <span class="data__title">Роль</span>
               <span class="data__value">${role}</span>
           </div>
           <div class="data">
-              <span class="data__title">ID</span>
+              <span class="data__title">Пошта підвтерджена?</span>
               <span class="data__value">${confirm}</span>
           </div>
         `
