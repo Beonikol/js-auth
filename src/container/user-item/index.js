@@ -81,6 +81,7 @@ class UserItem extends List {
             <span class="data__value skeleton"></span>
         </div>
         `
+
         break
 
       case this.STATE.SUCCESS:
